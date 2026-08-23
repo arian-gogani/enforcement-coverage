@@ -101,8 +101,7 @@ reported. Stricter than precedent is not a vulnerability.
 `POST /notes/{id}/pin` in Open WebUI — CVE-2026-45316.
 
 One further finding is a permission asymmetry in a currently maintained
-project. It has been reported privately to the maintainers and details are
-withheld until they have had a chance to respond.
+project. Details are withheld pending disclosure to the maintainers.
 
 **Two false positives.** `POST /tools/{id}/valves/user/update` writes the
 user's *own* valve settings and legitimately needs only read on the tool — the
