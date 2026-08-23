@@ -34,8 +34,14 @@ import json
 import os
 import re
 import sys
+import warnings
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
+
+# Parsing third-party source emits SyntaxWarning for things like invalid
+# escape sequences in their code. Those are not our problem and they bury
+# the actual output.
+warnings.filterwarnings("ignore", category=SyntaxWarning)
 
 # ---------------------------------------------------------------- constants
 
