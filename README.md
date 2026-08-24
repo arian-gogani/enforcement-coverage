@@ -100,8 +100,21 @@ reported. Stricter than precedent is not a vulnerability.
 
 `POST /notes/{id}/pin` in Open WebUI — CVE-2026-45316.
 
-One further finding is a permission asymmetry in a currently maintained
-project. Details are withheld pending disclosure to the maintainers.
+One further finding is a permission asymmetry in Netflix Dispatch:
+`POST /{incident_id}/resources` uses `IncidentViewPermission` while six
+sibling write operations use `IncidentEditPermission`.
+`IncidentViewPermission` returns True for any non-restricted incident;
+`IncidentEditPermission` requires admin, commander, or reporter. The
+handler queues ticket and group creation with no further check.
+
+Not reported, because there is nowhere to report it: the repository was
+archived by Netflix on 3 September 2025 and is read-only, it has no
+SECURITY.md, private vulnerability reporting is disabled for archived
+repos, and Dispatch is explicitly listed as out of scope on Netflix's
+bounty program. Publishing it here is the only remaining disclosure
+channel. It is low severity — it requires an authenticated organization
+member and affects only non-restricted incidents — and the project is no
+longer maintained.
 
 **Two false positives.** `POST /tools/{id}/valves/user/update` writes the
 user's *own* valve settings and legitimately needs only read on the tool — the
