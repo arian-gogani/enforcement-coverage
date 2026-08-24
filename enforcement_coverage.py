@@ -644,9 +644,14 @@ def main() -> int:
         print(__doc__)
         return 1
     root = sys.argv[1]
+    if not os.path.isdir(root):
+        print(f"Not a directory: {root}")
+        return 1
     routes = scan(root)
     if not routes:
-        print("No FastAPI routes found.")
+        print(f"No FastAPI routes found in {root}.")
+        print("This tool only supports FastAPI. It looks for functions "
+              "decorated with @router.get/post/put/patch/delete.")
         return 1
 
     controlled = [r for r in routes if r.controls]
